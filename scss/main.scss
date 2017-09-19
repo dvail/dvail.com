@@ -1,0 +1,74 @@
+@import './_normalize.scss';
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    font-family: 'Fira Sans', sans-serif;
+    color: white;
+    background: top center linear-gradient(15deg, #13547a 0%, #80d0c7 100%) no-repeat;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    li {
+        margin: 5px 0;
+    }
+
+    a {
+        text-transform: uppercase;
+        font-weight: 800;
+    }
+}
+
+h1 {
+    font-size: 1.9rem;
+    font-weight: 300;
+
+    span {
+        font-weight: 800;
+    }
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    padding: 3rem 2rem;
+    width: 200px;
+
+    .nav-icon {
+        float: left;
+        margin-right: 10px;
+        img {
+            width: 36px;
+        }
+    }
+}
+
+.content {
+    margin-left: 200px;
+    padding: 4rem;
+
+    p {
+        max-width: 40rem;
+    }
+}
