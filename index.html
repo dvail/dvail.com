@@ -30,9 +30,12 @@
     </section>
 
     <section id='projects'>
+        <h2>Recent Projects</h2>
+
         <div class='project'>
-            <h2>NY Snowmobile Webmap</h2>
-            <img src='/img/nysnowwebmap-thumb.png' alt='NY Snowmobile webmap screenshot'>
+            <h3>NY Snowmobile Webmap</h3>
+            <h5><a href='https://nysnowmobilewebmap.com'>https://nysnowmobilewebmap.com</a></h5>
+            <img class='project-thumbnail' src='/img/nysnowwebmap-thumb.png' alt='NY Snowmobile webmap screenshot'>
             <ul class='tools'>
                 <li>Javascript</li>
                 <li>Ruby</li>
@@ -57,8 +60,9 @@
         </div>
 
         <div class='project'>
-            <h2>Ithaca Trails</h2>
-            <img src='/img/ithaca-thumb.png' alt='Ithaca Trails screenshot'>
+            <h3>Ithaca Trails</h3>
+            <h5><a href='https://ithacatrails.org'>https://ithacatrails.org</a></h5>
+            <img class='project-thumbnail'  src='/img/ithacatrails-thumb.png' alt='Ithaca Trails screenshot'>
             <ul class='tools'>
                 <li>Javascript</li>
                 <li>Redux</li>
@@ -70,8 +74,28 @@
                 <li>Carto</li>
             </ul>
 
-            <p>IthacaTrails.org is a data driven site and webmap showcasing multi-use trail in Tompkins County NY.</p>
+            <p>IthacaTrails.org is a data driven site and webmap showcasing multi-use trail in Tompkins County NY. The site features a robust search mechanism for all types of trails that instantly displays valid search results. The search works stand alone on the homepage as well as being integrated into the map.</p>
+
+            <p>This site is entirely driven by geospatial data. A custom content management system is used to interface with the data at Carto.com and allow trail updates and new photos to be uploaded to the site.</p>
         </div>
+
+        <div class='project'>
+            <h3>Clodiku</h3>
+            <h5><a href='https://github.com/dvail/clodiku'>https://github.com/dvail/clodiku</a></h5>
+            <img class='project-thumbnail'  src='/img/clodiku-thumb.png' alt='Clodiku screenshot'>
+            <ul class='tools'>
+                <li>Java</li>
+                <li>Clojure</li>
+                <li>Kotlin</li>
+                <li>libgdx</li>
+                <li>Ashley ECS</li>
+            </ul>
+
+            <p>Clodiku is a "forever" project of mine, meaning that the scope of features and development time will last... forever. This project is a 2D action adventure game and development testing ground for new ideas.</p>
+
+            <p>In its first iteration, the game was written almost entirely in Clojure and all of the game logic was purely functional. Any change to the state of the game returned a new instance of the entire world, which was then itself be fed back into the system 60 times a second. This was a great learning resource for diving into functional programming, but ultimately it was more work than it was worth. The current version has been rewritten in Kotlin, which strikes a nice balance between pragmatism and expressiveness.</p>
+        </div>
+
     </section>
 
     <section id='resume'>
