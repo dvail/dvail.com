@@ -71,11 +71,29 @@ h1 {
 
     section {
         padding: 4rem 4rem 2rem 4rem;
+        min-height: 100vh;
+        background-color: #eaeaff;
+        color: #444;
+        border-left: 4px solid #888;
+
+        &:first-of-type {
+            color: white;
+            padding: 0 4rem;
+            background-color: transparent;
+            border: none;
+        }
     }
 
     p {
         max-width: 40rem;
     }
+}
+
+
+#bio {
+    display: flex;
+    align-items: center;
+
 }
 
 .project {
@@ -88,7 +106,7 @@ h1 {
     h5 {
         margin-top: 0.5rem;
         a {
-            color: rgba(255,255,255,0.8);
+            color: #449;
         }
     }
 }
@@ -110,7 +128,7 @@ h1 {
         padding: 4px 10px;
         border-radius: 4px;
         display: inline-block;
-        background-color: rgba(255,255,235,0.85);
-        color: #444;
+        color: rgba(255,255,235,0.85);
+        background-color: #246786;
     }
 }
