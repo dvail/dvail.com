@@ -24,6 +24,14 @@ $bp-smaller-than-desktophd : "max-width: 1200px" !default;
 @mixin larger-than-desktop { @media screen and ($bp-larger-than-desktop) { @content } }
 @mixin larger-than-desktophd { @media screen and ($bp-larger-than-desktophd) { @content } }
 
+@mixin transition($prop, $time, $func) {
+    -webkit-transition: $prop $time $func;
+    -moz-transition: $prop $time $func;
+    -ms-transition: $prop $time $func;
+    -o-transition: $prop $time $func;
+    transition: $prop $time $func;
+}
+
 * { box-sizing: border-box; }
 
 html, body {
@@ -54,7 +62,7 @@ ul {
 }
 
 nav {
-
+    
     @include smaller-than-tablet {
         ul { text-align: center; }
     }
@@ -94,6 +102,25 @@ h1 {
     }
 }
 
+#profile-pic {
+    border-radius: 100%;
+    border: 4px solid #ddddff;
+    max-width: 230px;
+    float: left;
+    clear: both;
+    margin-right: 2rem;
+
+    @include smaller-than-desktop {
+        max-width: 180px;
+    }
+
+    @include smaller-than-tablet {
+        float: none;
+        display: block;
+        margin: auto;
+    }
+}
+
 .sidebar {
     position: fixed;
     left: 0;
@@ -101,10 +128,10 @@ h1 {
     bottom: 0;
     height: 100%;
     padding: 3rem 2rem;
-    width: 240px;
+    width: 220px;
 
     @include smaller-than-desktop {
-        width: 200px;
+        width: 175px;
     }
 
     @include smaller-than-tablet {
@@ -117,7 +144,7 @@ h1 {
 
 
 .content {
-    margin-left: 200px;
+    margin-left: 175px;
 
     @include smaller-than-tablet {
         margin: 0;
@@ -137,11 +164,11 @@ h1 {
 
         &:first-of-type {
             color: white;
-            padding: 0 4rem;
+            padding: 0 4rem 0 1rem;
             background-color: transparent;
             border: none;
             @include smaller-than-tablet { 
-                padding: 1rem 3rem 3rem 3rem; 
+                padding: 1rem 2rem;
             }
         }
     }
