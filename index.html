@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>DVail.com</title>
-<meta name="description" content=""/>
-<meta name="keywords" content="" />
-<link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,800" rel="stylesheet">
-<link rel='stylesheet' href='./css/main.css'>
-</head>
-<body>
+---
+title: Home
+layout: default
+---
 <div class='sidebar'>
     <nav>
         <ul>
@@ -16,14 +9,14 @@
             <li><a href='#projects'>Projects</a></li>
             <li><a href='#resume'>Resume</a></li>
             <br>
-            <li class='nav-icon'><a href='https://www.linkedin.com/in/david-vail-8430194b'><img src='/img/linkedin.svg' alt='linkedin icon' /></a></li>
-            <li class='nav-icon'><a href='https://github.com/dvail'><img src='/img/github.svg' alt='github icon'/></a></li>
+            <li class='nav-icon'><a href='https://www.linkedin.com/in/david-vail-8430194b'><img src='{{ "assets/img/linkedin.svg" | relative_url }}' alt='linkedin icon' /></a></li>
+            <li class='nav-icon'><a href='https://github.com/dvail'><img src='{{ "assets/img/github.svg" | relative_url }}' alt='github icon'/></a></li>
         </ul>
     </nav>
 </div>
 <div class='content'>
     <section id='bio'>
-        <img id='profile-pic' src='./img/profile.jpg' alt="Dave Vail profile pic">
+      <img id='profile-pic' src='{{ "assets/img/profile.jpg" | relative_url }}' alt="Dave Vail profile pic">
         <div>
         <h1><span>Hello, I'm Dave Vail.</span><br> I design/develop for the web and mobile in Upstate New York.</h1>
 
@@ -34,12 +27,12 @@
     </section>
 
     <section id='projects'>
-        <h2>Recent Projects</h2>
+        <h2>Projects</h2>
 
         <div class='project'>
             <h3>NY Snowmobile Webmap</h3>
             <h5><a href='https://nysnowmobilewebmap.com'>https://nysnowmobilewebmap.com</a></h5>
-            <img class='project-thumbnail' src='/img/nysnowwebmap-thumb.png' alt='NY Snowmobile webmap screenshot'>
+            <img class='project-thumbnail' src='{{ "assets/img/nysnowwebmap-thumb.png" | relative_url }}' alt='NY Snowmobile webmap screenshot'>
             <ul class='tools'>
                 <li>Javascript</li>
                 <li>Ruby</li>
@@ -66,7 +59,7 @@
         <div class='project'>
             <h3>Ithaca Trails</h3>
             <h5><a href='https://ithacatrails.org'>https://ithacatrails.org</a></h5>
-            <img class='project-thumbnail'  src='/img/ithacatrails-thumb.png' alt='Ithaca Trails screenshot'>
+            <img class='project-thumbnail'  src='{{ "assets/img/ithacatrails-thumb.png" | relative_url }}' alt='Ithaca Trails screenshot'>
             <ul class='tools'>
                 <li>Javascript</li>
                 <li>Redux</li>
@@ -86,7 +79,7 @@
         <div class='project'>
             <h3>Clodiku</h3>
             <h5><a href='https://github.com/dvail/clodiku'>https://github.com/dvail/clodiku</a></h5>
-            <img class='project-thumbnail'  src='/img/clodiku-thumb.png' alt='Clodiku screenshot'>
+            <img class='project-thumbnail'  src='{{ "assets/img/clodiku-thumb.png" | relative_url }}' alt='Clodiku screenshot'>
             <ul class='tools'>
                 <li>Java</li>
                 <li>Clojure</li>
@@ -106,6 +99,3 @@
     <section id='resume'>
     </section>
 </div>
-<script src='./js/main.js'></script>
-</body>
-</html>

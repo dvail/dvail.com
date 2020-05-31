@@ -1,6 +1,9 @@
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
 extra/*
-images/snowdepth.jpg
 *.map
-.sass-cache/*
-.htaccess
 node_modules
+
