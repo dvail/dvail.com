@@ -9,7 +9,27 @@
 <link rel='stylesheet' href='{{ "/assets/css/main.css" | relative_url }}' >
 </head>
 <body>
-{{ content }}
+<div class='sidebar'>
+  <nav>
+    <ul>
+      <li><a href='/'>Blog</a></li>
+      <li><a href='/projects'>Projects</a></li>
+      <li><a href='/bio'>Bio</a></li>
+      <li><a href='/resume'>Resume</a></li>
+      <br>
+      <li class='nav-icon'><a href='https://www.linkedin.com/in/david-vail-8430194b'>
+        <img src='{{ "assets/img/linkedin.svg" | relative_url }}' alt='linkedin icon' />
+      </a></li>
+      <li class='nav-icon'><a href='https://github.com/dvail'>
+        <img src='{{ "assets/img/github.svg" | relative_url }}' alt='github icon' />
+      </a></li>
+    </ul>
+  </nav>
+</div>
+
+<div class='content'>
+  {{ content }}
+</div>
 <script src='{{ "/assets/js/main.js" | relative_url }}'></script>
 </body>
 </html>

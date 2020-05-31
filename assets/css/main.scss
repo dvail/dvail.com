@@ -25,12 +25,11 @@ $bp-smaller-than-desktophd : "max-width: 1200px" !default;
 @mixin larger-than-desktop { @media screen and ($bp-larger-than-desktop) { @content } }
 @mixin larger-than-desktophd { @media screen and ($bp-larger-than-desktophd) { @content } }
 
-@mixin transition($prop, $time, $func) {
-    -webkit-transition: $prop $time $func;
-    -moz-transition: $prop $time $func;
-    -ms-transition: $prop $time $func;
-    -o-transition: $prop $time $func;
-    transition: $prop $time $func;
+:root {
+    --color-orange-red: #ff5e62;
+    --color-peach: #ff9966;
+    --color-graphite: #1d1f21;
+    --color-minty-blue: #0d96b7;
 }
 
 * { box-sizing: border-box; }
@@ -44,7 +43,7 @@ html, body {
 body {
     font-family: 'Fira Sans', sans-serif;
     color: white;
-    background: top center linear-gradient(15deg, #ff5e62 0%, #ff9966 100%) no-repeat;
+    background: top center linear-gradient(15deg, var(--color-orange-red) 0%, var(--color-peach)  100%) no-repeat;
     background-attachment: fixed;
 }
 
@@ -147,30 +146,20 @@ h1 {
 
 .content {
     margin-left: 175px;
+    background-color: var(--color-graphite);
+    color: white;
 
     @include smaller-than-tablet {
         margin: 0;
     }
 
-    section {
+    > section {
         padding: 4rem 4rem 2rem 4rem;
         min-height: 100vh;
-        background-color: white;
-        color: #444;
 
         @include smaller-than-tablet {
             padding: 3rem;
             min-height: 0px;
-        }
-
-        &:first-of-type {
-            color: white;
-            padding: 0 4rem 0 1rem;
-            background-color: transparent;
-            border: none;
-            @include smaller-than-tablet { 
-                padding: 1rem 2rem;
-            }
         }
     }
 
@@ -179,10 +168,20 @@ h1 {
     }
 }
 
+.post-tags {
+    .tag {
+        display: inline-block;
+        color: var(--color-orange-red);
+        font-weight: bold;
+        font-family: monospace;
+    }
+}
+
 
 #bio {
     display: flex;
     align-items: center;
+    padding-left: 3rem;
 
     @include smaller-than-tablet {
         text-align: center;
@@ -200,7 +199,7 @@ h1 {
     h5 {
         margin-top: 0.5rem;
         a {
-            color: #449;
+            color: var(--color-peach);
         }
     }
 }
@@ -218,11 +217,12 @@ h1 {
     li {
         margin: 4px 1px;
         font-weight: 800;
-        font-size: 0.8rem;
-        padding: 4px 10px;
+        font-family: monospace;
+        font-size: 0.9rem;
+        padding: 4px 8px;
         border-radius: 4px;
         display: inline-block;
-        color: rgba(255,255,235,0.85);
-        background-color: #246786;
+        color: white;;
+        background-color: var(--color-minty-blue);
     }
 }
