@@ -29,7 +29,21 @@ $bp-smaller-than-desktophd : "max-width: 1200px" !default;
     --color-orange-red: #ff5e62;
     --color-peach: #ff9966;
     --color-cold-graphite: #1a2631;
+    --color-medium-cobalt: #294b6b;
+    --color-light-citrus: #fbebde;
     --color-minty-blue: #0d96b7;
+}
+
+body.dark {
+    --color-main-bg: var(--color-cold-graphite);
+    --color-main-text: white;
+    --color-links: var(--color-peach);
+}
+
+body.light {
+    --color-main-bg: var(--color-light-citrus);
+    --color-main-text: var(--color-medium-cobalt);
+    --color-links: var(--color-orange-red);
 }
 
 * { box-sizing: border-box; }
@@ -38,6 +52,8 @@ html, body {
     margin: 0;
     padding: 0;
     min-height: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 body {
@@ -48,8 +64,11 @@ body {
 }
 
 a {
-    color: white;
-    text-decoration: none;
+   text-decoration: none;
+}
+
+.content a {
+    color: var(--color-main-text);
 
     &:hover {
         text-decoration: underline;
@@ -59,10 +78,11 @@ a {
 .content p {
     font-size: 1em;
     line-height: 1.375em;
+    margin: 1.5rem 0;
 }
 
-p a {
-    color: var(--color-peach);
+.content p a {
+    color: var(--color-links);
 }
 
 ul {
@@ -83,11 +103,12 @@ nav {
 
     a {
         font-weight: 800;
+        color: white;
     }
 
     .nav-icon {
         @include larger-than-tablet {
-            float: left;
+            display: inline-block;
             margin-right: 10px;
         }
         img {
@@ -97,7 +118,7 @@ nav {
 }
 
 @include smaller-than-tablet {
-    nav { text-align: center; }
+    .sidebar { text-align: center; }
 }
 
 h1 {
@@ -112,10 +133,52 @@ h1 {
 
 figure {
     margin: 0;
+    overflow-x: auto;
+    max-width: 60rem;
 }
 
 figure.highlight {
     padding: 0.5rem 2rem;
+}
+
+body.light #theme-switch-control {
+    &:before {
+        transform: translateX(-30%);
+        content: '☀️';
+    }
+    #theme-switch {
+        background: bottom center no-repeat  url('{{"assets/img/sunglasses.png" | relative_url }}')  transparent;
+    }
+}
+
+body.dark #theme-switch-control {
+    &:before {
+        content: '🌘';
+        transform: translateX(30%);
+    }
+    #theme-switch {
+        background: bottom center no-repeat  url('{{"assets/img/glasses.png" | relative_url }}')  transparent;
+    }
+}
+
+
+#theme-switch-control {
+    display: inline-block;
+    height: 30px;
+    width: 100px;
+    text-align: center;
+    #theme-switch {
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
+    }
+    &:before {
+        transition: transform 0.2s ease-in-out;
+        display: block;
+        width: 100%;
+    }
 }
 
 #profile-pic {
@@ -142,9 +205,14 @@ figure.highlight {
     left: 0;
     top: 0;
     bottom: 0;
-    height: 100%;
     padding: 3rem 2rem;
-    width: 220px;
+
+    @include larger-than-tablet {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 
     @include smaller-than-desktop {
         width: 175px;
@@ -155,14 +223,15 @@ figure.highlight {
         position: static;
         width: 100%;
     }
-
 }
 
 
 .content {
     margin-left: 175px;
-    background-color: var(--color-cold-graphite);
-    color: white;
+    background-color: var(--color-main-bg);
+    color: var(--color-main-text);
+    transition: color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out;
 
     @include smaller-than-tablet {
         margin: 0;
@@ -243,7 +312,7 @@ figure.highlight {
         padding: 4px 8px;
         border-radius: 4px;
         display: inline-block;
-        color: white;;
+        color: white;
         background-color: var(--color-minty-blue);
     }
 }

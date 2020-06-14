@@ -124,12 +124,13 @@ the prototype method is allowed both with and without the use of `new`, which ca
 
 {% highlight javascript %}
 let joe = new Person("Joe");
-// The value of `this` when constructing Joe is the new object that is created. Properties like `name` will be set on the object
-// when `this.name = name` is called.
+// The value of `this` when constructing Joe is the new object that is created. Properties 
+// like `name` will be set on the object when `this.name = name` is called.
 
 let bernice = Person("Bernice");
-// Oh no, the `new` keyword is omitted. Instead of throwing an error JavaScript will happily just call the function, returning `undefined`.
-// The value of `this` inside the function will also be the global object `window`. So statements like `this.name = name` effectively
+// Oh no, the `new` keyword is omitted. Instead of throwing an error JavaScript will happily just call 
+// the function, returning `undefined`. The value of `this` inside the function will also be the global 
+// object `window`. So statements like `this.name = name` effectively 
 // become `window.name = name`, polluting the global namespace.
 {% endhighlight %}
 

@@ -13,6 +13,12 @@
 {% endif %}
 </head>
 <body>
+<script>
+  (() => {
+    let theme = localStorage.getItem('theme') || 'dark';
+    document.body.classList.toggle(theme);
+  })();
+</script>
 <div class='sidebar'>
   <nav>
     <p>David Vail</p>
@@ -30,6 +36,9 @@
       </a></li>
     </ul>
   </nav>
+  <div id="theme-switch-control" title="Change Theme">
+    <div id="theme-switch"></div>
+  </div>
 </div>
 
 <div class='content'>
