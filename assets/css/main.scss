@@ -28,7 +28,7 @@ $bp-smaller-than-desktophd : "max-width: 1200px" !default;
 :root {
     --color-orange-red: #ff5e62;
     --color-peach: #ff9966;
-    --color-graphite: #1d1f21;
+    --color-cold-graphite: #1a2631;
     --color-minty-blue: #0d96b7;
 }
 
@@ -54,6 +54,11 @@ a {
     &:hover {
         text-decoration: underline;
     }
+}
+
+.content p {
+    font-size: 1em;
+    line-height: 1.375em;
 }
 
 p a {
@@ -106,6 +111,14 @@ h1 {
     }
 }
 
+figure {
+    margin: 0;
+}
+
+figure.highlight {
+    padding: 0.5rem 2rem;
+}
+
 #profile-pic {
     border-radius: 100%;
     border: 4px solid #ddddff;
@@ -149,7 +162,7 @@ h1 {
 
 .content {
     margin-left: 175px;
-    background-color: var(--color-graphite);
+    background-color: var(--color-cold-graphite);
     color: white;
 
     @include smaller-than-tablet {

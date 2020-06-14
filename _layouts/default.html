@@ -8,6 +8,9 @@
 <meta name="keywords" content="" />
 <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,800" rel="stylesheet">
 <link rel='stylesheet' href='{{ "/assets/css/main.css" | relative_url }}' >
+{% if page.code_highlight %}
+<link rel="stylesheet" href="{{ '/assets/css/stata-dark.css' | relative_url }}">
+{% endif %}
 </head>
 <body>
 <div class='sidebar'>
