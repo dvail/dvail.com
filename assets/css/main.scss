@@ -41,7 +41,7 @@ html, body {
 }
 
 body {
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Muli', sans-serif;
     color: white;
     background: top center linear-gradient(15deg, var(--color-orange-red) 0%, var(--color-peach)  100%) no-repeat;
     background-attachment: fixed;
@@ -82,7 +82,6 @@ nav {
     }
 
     a {
-        text-transform: uppercase;
         font-weight: 800;
     }
 
