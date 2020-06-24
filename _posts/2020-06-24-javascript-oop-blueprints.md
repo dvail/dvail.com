@@ -304,8 +304,8 @@ to bind functions.
 Using `class` also does not get around the issue of encapsulation, as private fields and methods are only possible through conventions
 like the leading underscore.*
 
-*As of the time of this writing, private fields are part of a stage 3 proposal and are available in the latest versions of Chrome and MS Edge.
-[https://caniuse.com/#search=private](https://caniuse.com/#search=private)
+*As of the time of this writing, private fields are part of a stage 3 proposal and are available in the latest versions of Chrome and MS Edge.  
+[https://caniuse.com/#search=private](https://caniuse.com/#search=private)   
 [https://github.com/tc39/proposal-class-fields](https://github.com/tc39/proposal-class-fields)
 
 {% highlight javascript %}
@@ -317,6 +317,9 @@ class Person {
   }
 }
 {% endhighlight %}
+
+With the proposed private field syntax, the `deepestThoughts` property is no longer accessible from outside the class.
+
 
 ## Using function closures
 
@@ -429,3 +432,37 @@ Disadvantages:
 - See https://stackoverflow.com/questions/3561177/can-i-extend-a-closure-defined-class-in-javascript
 - Performance (possibly, benchmarks later)
 
+This big advantages with this method are the avoidance of `this` and actual encapsulation.
+
+All instance and constructor variables are accessible in the scope of the defined functions, so there is no
+need to access them via `this`. This brings two benefits. The first is that there is no need to `bind/call/apply` functions
+regardless of where they are defined or called within the closure. When the parent code calls a method on
+the returned object, the function that runs will have access to all of the scope defined in the closure and
+there is no need to retarget `this`.
+
+Additionally, because we are not adding/modifying properties on `this` there is no chance to typo a variable
+as long as you are developing with a linter. Using the same `_restIntervalid` example above, if you attempt to read
+or set this value and accidentally type a lower case `id`, there will be a warning that the identifier is not defined.
+These warnings don't appear when using properties on `this` because it is perfectly reasonable that you would want
+to dynamically add or access properties at runtime.
+
+The other big advantage of the function closure pattern is that you now have encapsulation that completely hides
+values from the calling code. This is not possible with `class` based methods (save the stage 3 syntax proposal mentioned above).
+Since the function closure is returning an object with only the public api you define, all other functions and variables defined
+withing will be hidden from the calling code.
+
+There is a slight downside with this compared to other OOP languages though, in that these values are also hidden when
+from child objects when using a form of inheritance. If we try to extend the object that is returned from the function
+we are still unable to access the "private" variables.
+
+
+### Performance
+
+In the pros/cons for each approach I've listed "Performance (possibly, benchmarks later)" as one of the considerations.
+This is a hypothesis that the function closure method will perform worse when a large volume of objects are created. The
+reason for this is that the prototype and class based approaches will create their methods once, and share the implementations
+across all objects that are created. The function closure method on the other hand will actually create a new copy of
+every method defined each time a new object is created.
+
+Intuitively, this will perform worse either in CPU cycles, memory usage, or both. In the next post I'll run some benchmarks
+and measure what the actual performance difference is across the three methods detailed here.

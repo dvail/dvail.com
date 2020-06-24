@@ -38,12 +38,14 @@ body.dark {
     --color-main-bg: var(--color-cold-graphite);
     --color-main-text: white;
     --color-links: var(--color-peach);
+    --color-code-highlight: #2b5980;
 }
 
 body.light {
     --color-main-bg: var(--color-light-citrus);
     --color-main-text: var(--color-medium-cobalt);
     --color-links: var(--color-orange-red);
+    --color-code-highlight: #cfdae4;
 }
 
 * { box-sizing: border-box; }
@@ -85,7 +87,7 @@ a {
     color: var(--color-links);
 }
 
-ul {
+nav ul, #projects ul, ul#post-list, ul.post-tags {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -161,6 +163,15 @@ body.dark #theme-switch-control {
     }
 }
 
+.content p > code {
+    background-color: var(--color-code-highlight);
+    padding: 2px;
+}
+
+.content .post-date {
+    margin: 0;
+    margin-bottom: 1rem;
+}
 
 #theme-switch-control {
     display: inline-block;
