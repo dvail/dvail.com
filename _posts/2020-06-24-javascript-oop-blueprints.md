@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "JavaScript OOP Blueprints"
-tags: javascript programming
+tags: programming javascript 
 code_highlight: true
 last_modified: 2020-07-04 9:20:00 -0500
 ---
