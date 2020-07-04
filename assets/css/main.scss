@@ -163,10 +163,16 @@ body.dark #theme-switch-control {
     }
 }
 
-.content p > code {
+.content code {
     background-color: var(--color-code-highlight);
     padding: 2px;
 }
+
+.content pre code {
+    background-color: unset;
+    padding: unset;
+}
+
 
 .content .post-date {
     margin: 0;
