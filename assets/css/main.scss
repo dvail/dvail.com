@@ -171,6 +171,12 @@ body.dark #theme-switch-control {
 .content .post-date {
     margin: 0;
     margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.content .post-last-modified {
+    font-style: italic;
+    font-size: 0.8rem;
 }
 
 #theme-switch-control {

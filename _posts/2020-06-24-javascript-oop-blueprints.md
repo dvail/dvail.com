@@ -3,6 +3,7 @@ layout: post
 title:  "JavaScript OOP Blueprints"
 tags: javascript programming
 code_highlight: true
+last_modified: 2020-07-04 9:20:00 -0500
 ---
 
 Unlike many other classical OOP languages, JavaScript gives you many ways to create the "classes" or blueprints of objects in your system. For the purposes of comparing these options,
@@ -137,7 +138,7 @@ let bernice = Person("Bernice");
 There are other `this` related pitfalls, which can be seen in the method definition below. The first is the use of `Function.bind`.
 Due to the changing nature of `this`, without binding the function passed to `setInterval` the `_rest` method will try to wake up
 the `window` object instead of the Person instance we would expect. In order to ensure `this` is what we want it to be, we need to call
-`this._rest.bind(this)` which creates a new function, which is a copy of the bound function with `this` sealed in place. Here, the first argument passed
+`this._rest.bind(this)` which creates a new function: a copy of the bound function with `this` sealed in place. Here, the first argument passed
 to `bind` is `this` which creates a new version of the `_rest()` function where the value of `this` inside it is always the same as the `this` that
 is passed in when the function is bound.
 
