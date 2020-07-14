@@ -54,6 +54,7 @@ html, body {
     margin: 0;
     padding: 0;
     min-height: 100%;
+    max-width: 100%;
     height: 100%;
     width: 100%;
 }
@@ -94,12 +95,26 @@ nav ul, #projects ul, ul#post-list, ul.post-tags {
 }
 
 nav {
+    p {
+        @include smaller-than-tablet {
+            padding-top: 1rem;
+            font-size: 1.3rem;
+        }
+    }
+
+    ul {
+        @include smaller-than-tablet {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+    }
+
     li {
         margin: 5px 0;
 
         @include smaller-than-tablet {
-            display: inline-block;
-            margin: 5px 20px 10px 20px;
+            margin: 10px 30px 10px 0;
         }
     }
 
@@ -119,14 +134,9 @@ nav {
     }
 }
 
-@include smaller-than-tablet {
-    .sidebar { text-align: center; }
-}
-
 h1 {
     font-size: 1.9rem;
     font-weight: 300;
-
 
     span {
         font-weight: 800;
@@ -141,26 +151,6 @@ figure {
 
 figure.highlight {
     padding: 0.5rem 2rem;
-}
-
-body.light #theme-switch-control {
-    &:before {
-        transform: translateX(-30%);
-        content: '☀️';
-    }
-    #theme-switch {
-        background: bottom center no-repeat  url('{{"assets/img/sunglasses.png" | relative_url }}')  transparent;
-    }
-}
-
-body.dark #theme-switch-control {
-    &:before {
-        content: '🌘';
-        transform: translateX(30%);
-    }
-    #theme-switch {
-        background: bottom center no-repeat  url('{{"assets/img/glasses.png" | relative_url }}')  transparent;
-    }
 }
 
 .content code {
@@ -185,22 +175,68 @@ body.dark #theme-switch-control {
     font-size: 0.8rem;
 }
 
+body.light #theme-switch-control {
+    &:after {
+        transform: translateX(-30%);
+        content: '☀️';
+    }
+    #theme-switch {
+        background: center center no-repeat  url('{{"assets/img/sunglasses.png" | relative_url }}')  rgba(200, 0, 0, 0.2);
+    }
+}
+
+body.dark #theme-switch-control {
+    &:after {
+        content: '🌘';
+        transform: translateX(30%);
+    }
+    #theme-switch {
+        background: center center no-repeat  url('{{"assets/img/glasses.png" | relative_url }}')  rgba(200, 0, 0, 0.2);
+    }
+}
+
 #theme-switch-control {
     display: inline-block;
-    height: 30px;
+    height: 60px;
     width: 100px;
+    padding: 10px;
     text-align: center;
+    position: relative;
+
+    @include smaller-than-tablet {
+        position: absolute;
+        top: 20px;
+        right: 5px;
+    }
+
     #theme-switch {
         cursor: pointer;
         display: block;
-        width: 100%;
         height: 100%;
         opacity: 0.5;
+        border-radius: 100%;
     }
-    &:before {
+
+    &:after, &:before {
+        margin-top: -10px;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+
+    &:after {
         transition: transform 0.2s ease-in-out;
-        display: block;
+        top: 0;
         width: 100%;
+        margin-bottom: 6px;
+    }
+
+    &:before {
+        font-size: 0.7rem;
+        position: absolute;
+        top: 3px;
+        content: '• • • • • • •';
+        color: transparentize($color: white, $amount: 0.8);
     }
 }
 
@@ -235,6 +271,7 @@ body.dark #theme-switch-control {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        align-items: center;
     }
 
     @include smaller-than-desktop {
@@ -242,7 +279,7 @@ body.dark #theme-switch-control {
     }
 
     @include smaller-than-tablet {
-        padding: 1rem;
+        padding: 1rem 1.25rem;
         position: static;
         width: 100%;
     }
