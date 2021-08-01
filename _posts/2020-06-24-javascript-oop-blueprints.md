@@ -179,7 +179,7 @@ shouldn't.
 
 ## Using the `class` keyword
 {% highlight javascript %}
-class Person(name) {
+class Person {
   constructor(name) {
     this.name = name;
 

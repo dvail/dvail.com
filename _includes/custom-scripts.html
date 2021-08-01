@@ -1,0 +1,7 @@
+{% for script in page.custom-js %}
+    <script src="{{ script }}"></script>
+{% endfor %}
+
+{% for css in page.custom-css %}
+    <link href="{{ css }}" rel="stylesheet">
+{% endfor %}
