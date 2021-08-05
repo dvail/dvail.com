@@ -98,7 +98,7 @@ function PersonF(name) {
 
   function _wake() {
     sleeping = false;
-    clearInterval(_rest);
+    clearInterval(_restIntervalId);
   }
 
   return {
@@ -109,26 +109,28 @@ function PersonF(name) {
   }
 }
 
-function createClassPeople() {
+function createClassPeople(n=1000) {
   var people = [];
-  for (var i = 0; i < 10000; i++) {
+  for (var i = 0; i < n; i++) {
     people.push(new PersonC(`Neo${i}`))
   }
-  for (var i = 0; i < 10000; i++) {
+  for (var i = 0; i < n; i++) {
     people[i].askName();
     people[i].askThoughts();
   }
+  return people;
 }
 
-function createFunctionPeople() {
+function createFunctionPeople(n=1000) {
   var people = [];
-  for (var i = 0; i < 10000; i++) {
+  for (var i = 0; i < n; i++) {
     people.push(PersonF(`Neo${i}`))
   }
-  for (var i = 0; i < 10000; i++) {
+  for (var i = 0; i < n; i++) {
     people[i].askName();
     people[i].askThoughts();
   }
+  return people;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -163,5 +165,12 @@ document.addEventListener("DOMContentLoaded", () => {
         runPerformanceButton.disabled = false
       })
       .run({ 'async': true });
+  })
+
+  let runMemoryButton = document.getElementById('run-memory-test')
+
+  runMemoryButton.addEventListener('click', () => {
+    window.classPeople = createClassPeople();
+    window.fnPeople = createFunctionPeople();
   })
 });

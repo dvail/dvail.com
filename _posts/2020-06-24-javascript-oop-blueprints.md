@@ -3,7 +3,7 @@ layout: post
 title:  "JavaScript OOP Blueprints"
 tags: programming javascript 
 code_highlight: true
-last_modified: 2020-07-04 9:20:00 -0500
+last_modified: 2021-08-04 22:20:00 -0500
 ---
 
 Unlike many other classical OOP languages, JavaScript gives you many ways to create the "classes" or blueprints of objects in your system. For the purposes of comparing these options,
@@ -467,3 +467,5 @@ every method defined each time a new object is created.
 
 Intuitively, this will perform worse either in CPU cycles, memory usage, or both. In the next post I'll run some benchmarks
 and measure what the actual performance difference is across the three methods detailed here.
+
+Update: the long awaited (by me) follow up to performance is now available [here](/2020/06/24/javascript-oop-blueprints.html).
