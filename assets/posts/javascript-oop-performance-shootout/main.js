@@ -172,5 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
   runMemoryButton.addEventListener('click', () => {
     window.classPeople = createClassPeople();
     window.fnPeople = createFunctionPeople();
+    runMemoryButton.textContent = "Objects Created!"
   })
 });

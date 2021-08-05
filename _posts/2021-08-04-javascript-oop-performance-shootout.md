@@ -174,7 +174,7 @@ You can test this live on your current browser with the benchmark button below:
   </pre>
 </section>
 
-## Now for some memory usage tests.
+## Now for some memory usage tests
 
 The main performance impact I envisioned in my earlier post was that the function closure method
 of creating objects would lead to more memory usage, due to the enclosed private functions being
@@ -186,7 +186,7 @@ to get memory usage are not very granular, and are not approved web standards.
 My initial attempt was testing out the Chrome-specific [performance.memory](https://developer.mozilla.org/en-US/docs/Web/API/Performance/memory)
 API. The approach here was to simply call `performance.memory.usedJSHeapSize` before any allocations, after one group of allocations, and
 then after the final group of allocations and compare the differences between each. The result of this call showed the memory usage of
-10,000 class based objects to be a grand total of 0B, while the total of 10,000 function closure based objects ended up in the 5MB ranges.
+10,000 class based objects to be a grand total of 0B, while the total of 10,000 function closure based objects ended up in the 5MB range.
 Clearly this was incorrect, and given the non-standard status of the API I decided to abandon this approach.
 
 I briefly looked into another similar [Measure Memory API](https://wicg.github.io/performance-measure-memory/) which is still in the 
@@ -195,8 +195,9 @@ memory usage and not designed for the granular type of memory measurement that I
 
 As a fallback, even though it isn't programmatic, I decided to use the built in heap snapshot tooling of the Chromium dev tools. This
 should at least give a rough idea of how closely the two object instantiation methods compare in terms of memory usage.
+[Note from the future, this gives a _very exact_ view of the memory usage of each of these methods!]
 
-For these tests, I allocated 10,000 of each object type and collected them into an Array slapped right onto `window` using the
+For the tests, I allocated 10,000 of each object type and collected them into an Array slapped right onto `window` using the
 button below. 
 
 <button id="run-memory-test">Allocate Objects</button>
@@ -210,33 +211,37 @@ approach to retain approximately _5-6x more memory_ than regular classes, given 
 
 Let's dive a little deeper into where the memory is taken up for each of these objects:
 
+### Class based memory usage
+
 ![Class based memory usage](/assets/posts/javascript-oop-performance-shootout/class-memory-usage.png)
 
 In the above heap snapshot of an array of class based `PersonC`s we can see that each instance uses just 48B of memory
 in the [Retained Size](https://developer.chrome.com/docs/devtools/memory-problems/memory-101/#retained_size) column. Which pieces of
 the `PersonC` object are unique to each object, and will be freed when the object is garbage collected and which pieces are shared?
 
-We can see in each of the expanded objects that each object references the same prototype (via memory reference @194503) object, and in the third
-expanded object we can see that this prototype is built using the `PersonC()` constructor which takes up 1,244B of memory and contains
+We can see in each of the expanded objects that each object references the same prototype object (via memory reference @194503), and in the third
+expanded object we can see that this prototype is built using the `PersonC()` constructor. This constructor function takes up 1,244B of memory and contains
 all of the instance methods defined in the class, shared among each instance. We can also see the `_restIntervalId` and `sleeping` properties
-that are shared memory across instances ("Oddball" values encompass `undefined`, `null`, `true` and `false`). The `map` variable is an
+that share memory across instances ("Oddball" values encompass `undefined`, `null`, `true` and `false`). The `map :: system` value here is an
 internal property used to enable [fast property lookup](https://chromium.googlesource.com/external/github.com/v8/v8.wiki/+/60dc23b22b18adc6a8902bd9693e386a3748040a/Design-Elements.md#fast-property-access) in JavaScript objects, which is also shared. The `_deepestThoughts` value, since it is statically defined for
-all instances is an interned string and energyLevel is a small integer number, both of which also share memory across instances of the class.
+all instances, is an interned string while `energyLevel` is a small integer number, both of which also share memory across instances of the class.
 
 Taking all these into account, the only pieces of memory that are unique to each object, at least without mutation of their internal values, are
 the `name` property (16B), which is a different string for each object, and the memory needed to store information about the object itself (32B), for
 a total of 48B per object.
 
+### Function closure based memory usage
+
 ![Function closure based memory usage](/assets/posts/javascript-oop-performance-shootout/fn-memory-usage.png)
 
-In the function closure based method of object creation we can see that each object consumes 284B of memory compared to the class
+In the function closure based method of object creation we can see that each object consumes 284B of memory compared to the 48B of the class
 based equivalent. We can also see that each instance here shares the same prototype object, but expanding the prototype shows a constructor
-of type `Object()` instead - the base of the prototype hierarchy in JavaScript. Since all objects in JavaScript tie back to this original
+of type `Object()` - the base of the prototype hierarchy in JavaScript. Since all objects in JavaScript tie back to this original
 prototype, the garbage collection of `PersonF` based objects will not free any of this memory. At the top level of each object we can
 find references to the `askName`, `askThoughts` and `exercise` functions (each 32B), and see that each one is a separate instance 
 due to the different memory addresses.
 
-Additionally, as further proof in the browser console:
+As an aside, further proof of shared memory can be seen in the browser console:
 
 {% highlight javascript %}
 window.classPeople[0].askThoughts === window.classPeople[1].askThoughts
@@ -246,15 +251,17 @@ window.fnPeople[0].askThoughts === window.fnPeople[1].askThoughts
 {% endhighlight javascript %}
 
 This leaves quite a bit of retained memory, and a bunch of properties, unaccounted for. Where are the other functions and values defined
-in our `PersonF` function? Digging into some of the properties reveals a little more. Opening up the `askName` method shows a menu item 
+in our `PersonF` function? Digging into some of the properties we _do_ see reveals a little more. Opening up the `askName` method shows a menu item 
 called "context", and opening that reveals the missing data: the values captured via function closure in `askName`'s lexical scope.
 
 ![Context values in the function's closure](/assets/posts/javascript-oop-performance-shootout/context-closure.png)
 
 Totalling up the values unique to the object in the closure scope, `_rest`, `_sleep`, `_wake` and `name` gives us an additional 112B, bringing
 the total to 208B. Then add the memory allocated for each unique object (28B Shallow Size), and the memory for each unique context (48B Shallow
-Size) completes the grand total of 284B. Note that if you were to open each function attached to the Person object you would see a context entry 
-for each with the same memory location. However if you were to do the same on another instance in the array you would find that the context value
+Size) completes the grand total of 284B. 
+
+Note that if you were to open each function attached to the Person object you would see a context entry 
+under each function with the same memory location. However if you were to do the same on another instance in the array you would find that the context value
 of the closure has yet another memory location. This because each context is a shared reference to the enclosed values that are created on
 every individual call to `PersonF()`, providing true encapsulation (at the expense of much higher memory usage).
 
@@ -265,5 +272,5 @@ and allowing true encapsulation of data and private methods, this approach clear
 
 It seems that the function closure approach would be better suited to situations where there are a known low number of objects being
 initialized, such as the outer boundaries of your application when creating coordinating modules of code. When the number of objects
-is going to be large, possibly with many properties, or has a need to be initialized very quickly in a loop the class based approach 
+is going to be large, possibly with many properties, or has a need to be initialized very quickly in a loop, the class based approach 
 or even non-OOP approach may be a more appropriate choice.
